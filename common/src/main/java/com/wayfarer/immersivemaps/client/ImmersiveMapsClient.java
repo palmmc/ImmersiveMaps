@@ -50,7 +50,7 @@ public class ImmersiveMapsClient {
             } else {
                 Minecraft mc = Minecraft.getInstance();
                 if (mc.level != null && mc.level.dimension() == Level.OVERWORLD) {
-                    BlockPos spawn = mc.level.getRespawnData().pos();
+                    BlockPos spawn = mc.level.getSharedSpawnPos();
                     WaypointType wpType = ImmersiveMapsConfig.waypointDisplayType == ImmersiveMapsConfig.WaypointDisplayType.FOLD
                             ? WaypointType.FOLDED
                             : WaypointType.STANDARD;

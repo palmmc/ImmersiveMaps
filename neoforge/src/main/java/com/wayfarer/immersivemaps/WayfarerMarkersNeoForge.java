@@ -19,14 +19,14 @@ public class WayfarerMarkersNeoForge {
     public WayfarerMarkersNeoForge(IEventBus modEventBus, ModContainer modContainer) {
         CommonClass.init();
 
-        if (FMLEnvironment.getDist().isClient()) {
+        if (FMLEnvironment.dist.isClient()) {
             modContainer.registerExtensionPoint(IConfigScreenFactory.class,
                     (container, screen) -> ImmersiveMapsConfigScreen.create(screen));
         }
 
         NeoForge.EVENT_BUS.addListener(this::onPlayerTick);
 
-        if (FMLEnvironment.getDist().isClient()) {
+        if (FMLEnvironment.dist.isClient()) {
             ImmersiveMapsClient.init();
         }
     }
