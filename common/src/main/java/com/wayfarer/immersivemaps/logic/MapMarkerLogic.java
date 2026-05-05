@@ -77,7 +77,7 @@ public class MapMarkerLogic {
 
                 if (pos.getY() == 100) {
                     int height = level.getHeight(Heightmap.Types.WORLD_SURFACE, pos.getX(), pos.getZ());
-                    if (height > level.getMinY()) {
+                    if (height > level.getMinBuildHeight()) {
                         pos = new BlockPos(pos.getX(), height + 1, pos.getZ());
                     }
                 }
