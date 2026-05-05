@@ -1,0 +1,36 @@
+{
+  // Configuration
+  "config.immersivemaps.title": "Immersive Maps",
+  // Client Configuration
+  "config.immersivemaps.category.client": "Client Settings",
+  "config.immersivemaps.waypointDisplayType": "Waypoint Display Type",
+  "config.immersivemaps.waypointDisplayType.description": "STANDARD - Icon and text are always visible. FOLD - Text folds down from icon when you are looking at the waypoint.",
+  "config.immersivemaps.showLocatorMarkers": "Show Locator Icons",
+  "config.immersivemaps.showLocatorMarkers.description": "Controls when locator waypoint icons for this mod should be visible.",
+  "config.immersivemaps.compassWaypointColor": "Compass Color",
+  "config.immersivemaps.compassWaypointColor.description": "Color of the compass waypoint.",
+  "config.immersivemaps.recoveryCompassWaypointColor": "Recovery Compass Color",
+  "config.immersivemaps.recoveryCompassWaypointColor.description": "Color of the recovery compass waypoint.",
+  // Structure Color Configuration
+  "config.immersivemaps.category.structures": "Structure Colors",
+  "config.immersivemaps.villageWaypointColor": "Village",
+  "config.immersivemaps.villageWaypointColor.description": "Color of the village marker waypoint.",
+  "config.immersivemaps.templeWaypointColor": "Temple",
+  "config.immersivemaps.templeWaypointColor.description": "Color of the jungle temple marker waypoint.",
+  "config.immersivemaps.monumentWaypointColor": "Monument",
+  "config.immersivemaps.monumentWaypointColor.description": "Color of the ocean monument marker waypoint.",
+  "config.immersivemaps.mansionWaypointColor": "Mansion",
+  "config.immersivemaps.mansionWaypointColor.description": "Color of the woodland mansion marker waypoint.",
+  "config.immersivemaps.trialChambersWaypointColor": "Trial Chambers",
+  "config.immersivemaps.trialChambersWaypointColor.description": "Color of the trial chambers marker waypoint.",
+  "config.immersivemaps.buriedTreasureWaypointColor": "Buried Treasure",
+  "config.immersivemaps.buriedTreasureWaypointColor.description": "Color of the buried treasure marker waypoint.",
+  "config.immersivemaps.swampHutWaypointColor": "Swamp Hut",
+  "config.immersivemaps.swampHutWaypointColor.description": "Color of the witch hut marker waypoint.",
+  // Server Configuration
+  "config.immersivemaps.category.server": "Server Settings",
+  "config.immersivemaps.sendStructureWaypoints": "Send Structure Waypoints",
+  "config.immersivemaps.sendStructureWaypoints.description": "Send structure waypoints to clients.",
+  "config.immersivemaps.sendBannerWaypoints": "Send Banner Waypoints",
+  "config.immersivemaps.sendBannerWaypoints.description": "Send banner waypoints to clients."
+}
