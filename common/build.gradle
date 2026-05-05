@@ -5,6 +5,14 @@ plugins {
 
 neoForge {
     neoFormVersion = neo_form_version
+    def at = file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers.from(at.absolutePath)
+    }
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
 }
 
 repositories {
@@ -14,8 +22,8 @@ repositories {
 dependencies {
     compileOnly "org.spongepowered:mixin:0.8.5"
     implementation "org.jetbrains:annotations:24.1.0"
-    compileOnly "dev.isxander:yet-another-config-lib:${yacl_version}-fabric"
-    implementation "maven.modrinth:wayfarerlib:${wayfarer_version}-fabric"
+    compileOnly "dev.isxander:yet-another-config-lib:${yacl_version}-neoforge"
+    compileOnly "maven.modrinth:wayfarerlib:${wayfarer_version}-neoforge"
 }
 
 configurations {
@@ -39,6 +47,15 @@ def loaderAttribute = Attribute.of('io.github.mcgradleconventions.loader', Strin
     configurations.named("$variant") {
         attributes {
             attribute(loaderAttribute, 'common')
+        }
+    }
+}
+sourceSets.configureEach {
+    [it.compileClasspathConfigurationName, it.runtimeClasspathConfigurationName].each { variant->
+        configurations.named("$variant") {
+            attributes {
+                attribute(loaderAttribute, 'common')
+            }
         }
     }
 }

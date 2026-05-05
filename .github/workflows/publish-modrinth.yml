@@ -73,10 +73,11 @@ jobs:
           }
 
           G_VERSIONS_JSON=$(echo "$GAME_VERSIONS" | tr ',' '\n' | jq -R . | jq -s -c .)
+          MOD_NAME_DASHED=$(echo $MOD_NAME | tr ' ' '-')
 
           # Find pre-downloaded JAR files
-          echo "fabric_jar=$(find build/release-artifacts -name "*$MOD_NAME*fabric.jar" | head -n 1)" >> $GITHUB_OUTPUT
-          echo "neoforge_jar=$(find build/release-artifacts -name "*$MOD_NAME*neoforge.jar" | head -n 1)" >> $GITHUB_OUTPUT
+          echo "fabric_jar=$(find build/release-artifacts -name "*$MOD_NAME_DASHED*fabric.jar" | head -n 1)" >> $GITHUB_OUTPUT
+          echo "neoforge_jar=$(find build/release-artifacts -name "*$MOD_NAME_DASHED*neoforge.jar" | head -n 1)" >> $GITHUB_OUTPUT
           
           echo "game_versions=$G_VERSIONS_JSON" >> $GITHUB_OUTPUT
           echo "deps_fabric=$(parse_deps "$DEPS_FABRIC")" >> $GITHUB_OUTPUT
