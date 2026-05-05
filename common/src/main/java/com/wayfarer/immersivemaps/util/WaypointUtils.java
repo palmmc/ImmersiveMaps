@@ -1,14 +1,14 @@
 package com.wayfarer.immersivemaps.util;
 
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public class WaypointUtils {
-    public static Identifier getIconForType(String type) {
+    public static ResourceLocation getIconForType(String type) {
         String path = type;
         if (path.startsWith("banner_")) {
             path = path.substring(7) + "_banner";
         }
-        return Identifier.fromNamespaceAndPath("minecraft", "textures/map/decorations/" + path + ".png");
+        return ResourceLocation.fromNamespaceAndPath("minecraft", "textures/map/decorations/" + path + ".png");
     }
 
     public static String getStructureDisplayName(String type) {

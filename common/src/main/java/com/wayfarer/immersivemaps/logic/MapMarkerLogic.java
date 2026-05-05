@@ -11,7 +11,7 @@ import com.wayfarer.immersivemaps.util.WaypointUtils;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -58,7 +58,7 @@ public class MapMarkerLogic {
 
         for (Entry<String, MapDecoration> entry : decorations.entrySet()) {
             MapDecoration decoration = entry.getValue();
-            Identifier typeId = decoration.type().value().assetId();
+            ResourceLocation typeId = decoration.type().value().assetId();
             String typePath = typeId.getPath();
 
             if (isSupported(typePath)) {
@@ -92,7 +92,7 @@ public class MapMarkerLogic {
                     color = ColorHelper.getHexFromMarkerColor(typePath);
                 }
 
-                Identifier texture = WaypointUtils.getIconForType(typePath);
+                ResourceLocation texture = WaypointUtils.getIconForType(typePath);
 
                 WayfarerRegistry.WaypointType wpType = ImmersiveMapsConfig.waypointDisplayType == ImmersiveMapsConfig.WaypointDisplayType.FOLD
                         ? WayfarerRegistry.WaypointType.FOLDED

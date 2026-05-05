@@ -9,7 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.LodestoneTracker;
@@ -17,9 +17,9 @@ import net.minecraft.world.level.Level;
 
 public class ImmersiveMapsClient {
 
-    private static final Identifier COMPASS_ICON = Identifier.fromNamespaceAndPath("immersivemaps",
+    private static final ResourceLocation COMPASS_ICON = ResourceLocation.fromNamespaceAndPath("immersivemaps",
             "textures/map/decorations/compass.png");
-    private static final Identifier RECOVERY_COMPASS_ICON = Identifier.fromNamespaceAndPath("immersivemaps",
+    private static final ResourceLocation RECOVERY_COMPASS_ICON = ResourceLocation.fromNamespaceAndPath("immersivemaps",
             "textures/map/decorations/recovery_compass.png");
 
     public static void init() {
@@ -77,7 +77,7 @@ public class ImmersiveMapsClient {
         return defaultName;
     }
 
-    private static void registerMarker(GlobalPos globalPos, String name, Identifier icon, int color) {
+    private static void registerMarker(GlobalPos globalPos, String name, ResourceLocation icon, int color) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null && mc.level.dimension().equals(globalPos.dimension())) {
             WaypointType wpType = ImmersiveMapsConfig.waypointDisplayType == ImmersiveMapsConfig.WaypointDisplayType.FOLD
