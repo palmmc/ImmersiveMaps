@@ -64,7 +64,11 @@ jobs:
 
       - name: Build mod
         if: steps.check_version.outputs.changed == 'true'
-        run: chmod +x gradlew && ./gradlew fabric:build neoforge:build
+        run: |
+          chmod +x gradlew
+          ./gradlew fabric:build neoforge:build
+          # Replace spaces with dashes in all built JARs
+          find . -name "* *.jar" -type f -exec bash -c 'mv "$1" "${1// /-}"' _ {} \;
 
       - name: Draft release
         if: steps.check_version.outputs.changed == 'true'
