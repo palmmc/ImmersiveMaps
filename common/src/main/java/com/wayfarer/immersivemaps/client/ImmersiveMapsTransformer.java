@@ -16,6 +16,23 @@ public class ImmersiveMapsTransformer implements WayfarerRegistry.WaypointTransf
 
         boolean isMarker = namespace.equals("immersivemaps");
         boolean isStructure = namespace.equals("minecraft") && path.contains("textures/map/decorations/");
+        boolean isPlayer = namespace.equals("wayfarer") && path.equals("player");
+
+        if (isPlayer) {
+            net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+            if (mc.player != null && ImmersiveMapsConfig.showPlayersInWorldWithCompass) {
+                boolean holdingCompass = mc.player.getMainHandItem().is(net.minecraft.world.item.Items.COMPASS)
+                        || mc.player.getMainHandItem().is(net.minecraft.world.item.Items.RECOVERY_COMPASS)
+                        || mc.player.getOffhandItem().is(net.minecraft.world.item.Items.COMPASS)
+                        || mc.player.getOffhandItem().is(net.minecraft.world.item.Items.RECOVERY_COMPASS);
+                if (holdingCompass) {
+                    WaypointType type = ImmersiveMapsConfig.waypointDisplayType == ImmersiveMapsConfig.WaypointDisplayType.FOLD
+                            ? WaypointType.FOLDED
+                            : WaypointType.STANDARD;
+                    return new WayfarerRegistry.Waypoint(wp.name, wp.pos, wp.icon, wp.color, type, wp.locatorType);
+                }
+            }
+        }
 
         if (isMarker || isStructure) {
             WaypointType type = wp.type;

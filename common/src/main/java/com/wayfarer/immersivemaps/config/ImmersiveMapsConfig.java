@@ -18,6 +18,7 @@ public class ImmersiveMapsConfig {
     public static int compassWaypointColor = 0xFFFFFF;
     public static int recoveryCompassWaypointColor = 0x888888;
     public static boolean showLocatorMarkers = true;
+    public static boolean showPlayersInWorldWithCompass = true;
 
     // Structure Colors
     public static int villageWaypointColor = 0xFFFFFF;
@@ -67,6 +68,7 @@ public class ImmersiveMapsConfig {
                         case "recoveryCompassWaypointColor" ->
                             recoveryCompassWaypointColor = parseColor(value, 0x888888);
                         case "showLocatorMarkers" -> showLocatorMarkers = Boolean.parseBoolean(value);
+                        case "showPlayersInWorldWithCompass" -> showPlayersInWorldWithCompass = Boolean.parseBoolean(value);
 
                         case "villageWaypointColor" -> villageWaypointColor = parseColor(value, 0xFFFFFF);
                         case "templeWaypointColor" -> templeWaypointColor = parseColor(value, 0xFFFFFF);
@@ -100,6 +102,9 @@ public class ImmersiveMapsConfig {
         lines.add("");
         lines.add("# Whether or not to show marker waypoints on the locator bar.");
         lines.add("showLocatorMarkers = " + showLocatorMarkers);
+        lines.add("");
+        lines.add("# Whether to show other players as in-world waypoints when holding a compass.");
+        lines.add("showPlayersInWorldWithCompass = " + showPlayersInWorldWithCompass);
         lines.add("");
         lines.add("# Hex color for compass waypoints. Defaults to white.");
         lines.add("compassWaypointColor = \"" + formatColor(compassWaypointColor) + "\"");
