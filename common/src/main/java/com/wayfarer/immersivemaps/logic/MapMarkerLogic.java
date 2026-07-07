@@ -27,21 +27,21 @@ public class MapMarkerLogic {
         if (player.tickCount % 20 != 0)
             return;
 
-        boolean hasMap = checkHand(player, player.getMainHandItem()) || checkHand(player, player.getOffhandItem());
-
-        if (!hasMap) {
-            WayfarerRegistry.clearWaypoints(player);
+        java.util.List<WayfarerRegistry.Waypoint> waypoints = new java.util.ArrayList<>();
+        if (!checkHand(player, player.getMainHandItem(), waypoints)) {
+            checkHand(player, player.getOffhandItem(), waypoints);
         }
+
+        WayfarerRegistry.syncWaypoints(player, waypoints);
     }
 
-    private static boolean checkHand(ServerPlayer player, ItemStack stack) {
+    private static boolean checkHand(ServerPlayer player, ItemStack stack, java.util.List<WayfarerRegistry.Waypoint> waypoints) {
         if (stack.is(Items.FILLED_MAP)) {
             MapId mapId = stack.get(DataComponents.MAP_ID);
             if (mapId != null) {
                 MapItemSavedData data = player.level().getMapData(mapId);
                 if (data != null) {
-                    WayfarerRegistry.clearWaypoints(player);
-                    syncMapMarkers(player, data);
+                    collectMapMarkers(player, data, waypoints);
                     return true;
                 }
             }
@@ -49,7 +49,7 @@ public class MapMarkerLogic {
         return false;
     }
 
-    private static void syncMapMarkers(ServerPlayer player, MapItemSavedData data) {
+    private static void collectMapMarkers(ServerPlayer player, MapItemSavedData data, java.util.List<WayfarerRegistry.Waypoint> waypoints) {
         double centerOffset = (double) (1 << data.scale);
         IMapItemSavedData accessor = (IMapItemSavedData) data;
         Map<String, BlockPos> accurate = accessor.markers_getAccuratePositions();
@@ -101,7 +101,7 @@ public class MapMarkerLogic {
                         ? WayfarerRegistry.LocatorType.ICON
                         : WayfarerRegistry.LocatorType.HIDDEN;
 
-                WayfarerRegistry.sendWaypoint(player, name, pos, texture, color, wpType, locType);
+                waypoints.add(new WayfarerRegistry.Waypoint(name, pos, texture, color, wpType, locType));
             }
         }
     }
