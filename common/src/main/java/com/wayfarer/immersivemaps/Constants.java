@@ -1,5 +1,7 @@
 package com.wayfarer.immersivemaps;
 
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

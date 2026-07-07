@@ -34,6 +34,30 @@ public class ImmersiveMapsClient {
         WayfarerRegistry.AUTOMATED_PROVIDER.clear();
         checkCompass(mc.player.getMainHandItem());
         checkCompass(mc.player.getOffhandItem());
+
+        if (ImmersiveMapsConfig.showPlayersInWorldWithCompass) {
+            boolean holdingCompass = mc.player.getMainHandItem().is(Items.COMPASS)
+                    || mc.player.getMainHandItem().is(Items.RECOVERY_COMPASS)
+                    || mc.player.getOffhandItem().is(Items.COMPASS)
+                    || mc.player.getOffhandItem().is(Items.RECOVERY_COMPASS);
+            if (holdingCompass && mc.level != null) {
+                WaypointType wpType = ImmersiveMapsConfig.waypointDisplayType == ImmersiveMapsConfig.WaypointDisplayType.FOLD
+                        ? WaypointType.FOLDED
+                        : WaypointType.STANDARD;
+                for (net.minecraft.world.entity.player.Player otherPlayer : mc.level.players()) {
+                    if (otherPlayer == mc.player)
+                        continue;
+                    WayfarerRegistry.AUTOMATED_PROVIDER.add(new WayfarerRegistry.Waypoint(
+                            otherPlayer.getName().getString(),
+                            otherPlayer.blockPosition(),
+                            Identifier.fromNamespaceAndPath("wayfarer", "player"),
+                            0xFFFFFF,
+                            wpType,
+                            LocatorType.STANDARD
+                    ));
+                }
+            }
+        }
     }
 
     private static void checkCompass(ItemStack stack) {

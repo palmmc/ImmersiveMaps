@@ -7,6 +7,8 @@
   "config.immersivemaps.waypointDisplayType.description": "STANDARD - Icon and text are always visible. FOLD - Text folds down from icon when you are looking at the waypoint.",
   "config.immersivemaps.showLocatorMarkers": "Show Locator Icons",
   "config.immersivemaps.showLocatorMarkers.description": "Controls when locator waypoint icons for this mod should be visible.",
+  "config.immersivemaps.showPlayersInWorldWithCompass": "Show Players with Compass",
+  "config.immersivemaps.showPlayersInWorldWithCompass.description": "Shows other players as in-world waypoints when holding a compass.",
   "config.immersivemaps.compassWaypointColor": "Compass Color",
   "config.immersivemaps.compassWaypointColor.description": "Color of the compass waypoint.",
   "config.immersivemaps.recoveryCompassWaypointColor": "Recovery Compass Color",
