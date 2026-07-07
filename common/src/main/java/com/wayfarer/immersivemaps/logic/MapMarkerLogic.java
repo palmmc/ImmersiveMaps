@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.wayfarer.api.WayfarerRegistry;
+import com.wayfarer.immersivemaps.compat.MapAtlasesCompat;
 import com.wayfarer.immersivemaps.config.ImmersiveMapsConfig;
 import com.wayfarer.immersivemaps.util.ColorHelper;
 import com.wayfarer.immersivemaps.util.IMapItemSavedData;
@@ -23,33 +24,48 @@ import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 
 public class MapMarkerLogic {
 
+    private static final boolean IS_MAP_ATLASES_LOADED;
+
+    static {
+        boolean loaded = false;
+        try {
+            Class.forName("pepjebs.mapatlases.MapAtlasesMod");
+            loaded = true;
+        } catch (ClassNotFoundException e) {
+        }
+        IS_MAP_ATLASES_LOADED = loaded;
+    }
+
     public static void onServerTick(ServerPlayer player) {
         if (player.tickCount % 20 != 0)
             return;
 
-        boolean hasMap = checkHand(player, player.getMainHandItem()) || checkHand(player, player.getOffhandItem());
-
-        if (!hasMap) {
-            WayfarerRegistry.clearWaypoints(player);
+        java.util.List<WayfarerRegistry.Waypoint> waypoints = new java.util.ArrayList<>();
+        if (!checkHand(player, player.getMainHandItem(), waypoints)) {
+            checkHand(player, player.getOffhandItem(), waypoints);
         }
+
+        WayfarerRegistry.syncWaypoints(player, waypoints);
     }
 
-    private static boolean checkHand(ServerPlayer player, ItemStack stack) {
+    private static boolean checkHand(ServerPlayer player, ItemStack stack, java.util.List<WayfarerRegistry.Waypoint> waypoints) {
         if (stack.is(Items.FILLED_MAP)) {
             MapId mapId = stack.get(DataComponents.MAP_ID);
             if (mapId != null) {
                 MapItemSavedData data = player.level().getMapData(mapId);
                 if (data != null) {
-                    WayfarerRegistry.clearWaypoints(player);
-                    syncMapMarkers(player, data);
+                    collectMapMarkers(player, data, waypoints);
                     return true;
                 }
             }
+        } else if (IS_MAP_ATLASES_LOADED && MapAtlasesCompat.isAtlas(stack)) {
+            MapAtlasesCompat.collectAtlasMarkers(player, stack, waypoints);
+            return true;
         }
         return false;
     }
 
-    private static void syncMapMarkers(ServerPlayer player, MapItemSavedData data) {
+    public static void collectMapMarkers(ServerPlayer player, MapItemSavedData data, java.util.List<WayfarerRegistry.Waypoint> waypoints) {
         double centerOffset = (double) (1 << data.scale);
         IMapItemSavedData accessor = (IMapItemSavedData) data;
         Map<String, BlockPos> accurate = accessor.markers_getAccuratePositions();
@@ -101,7 +117,7 @@ public class MapMarkerLogic {
                         ? WayfarerRegistry.LocatorType.ICON
                         : WayfarerRegistry.LocatorType.HIDDEN;
 
-                WayfarerRegistry.sendWaypoint(player, name, pos, texture, color, wpType, locType);
+                waypoints.add(new WayfarerRegistry.Waypoint(name, pos, texture, color, wpType, locType));
             }
         }
     }

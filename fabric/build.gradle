@@ -15,6 +15,7 @@ dependencies {
     modImplementation "dev.isxander:yet-another-config-lib:${yacl_version}-fabric"
     include "dev.isxander:yet-another-config-lib:${yacl_version}-fabric"
     modImplementation "maven.modrinth:wayfarerlib:${wayfarer_version}-fabric"
+    compileOnly "maven.modrinth:map-atlases-forge:1.21-6.6.0"
 }
 
 loom {

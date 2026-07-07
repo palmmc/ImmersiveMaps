@@ -59,4 +59,5 @@ dependencies {
     implementation "dev.isxander:yet-another-config-lib:${yacl_version}-neoforge"
     jarJar "dev.isxander:yet-another-config-lib:${yacl_version}-neoforge"
     implementation "maven.modrinth:wayfarerlib:${wayfarer_version}-neoforge"
+    compileOnly "maven.modrinth:map-atlases-forge:1.21-6.6.0"
 }
