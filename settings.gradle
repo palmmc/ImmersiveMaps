@@ -28,7 +28,6 @@ if (wayfarerDir.exists()) {
         dependencySubstitution {
             def wayfarerVersion = providers.gradleProperty('wayfarer_version').getOrNull()
             if (wayfarerVersion != null) {
-                substitute module("maven.modrinth:wayfarerlib:${wayfarerVersion}-common") using project(':common')
                 substitute module("maven.modrinth:wayfarerlib:${wayfarerVersion}-fabric") using project(':fabric')
                 substitute module("maven.modrinth:wayfarerlib:${wayfarerVersion}-neoforge") using project(':neoforge')
             }
