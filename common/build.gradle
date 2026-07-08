@@ -23,7 +23,7 @@ dependencies {
     compileOnly "org.spongepowered:mixin:0.8.5"
     implementation "org.jetbrains:annotations:24.1.0"
     compileOnly "dev.isxander:yet-another-config-lib:${yacl_version}-neoforge"
-    compileOnly "maven.modrinth:wayfarerlib:${wayfarer_version}-common"
+    compileOnly "maven.modrinth:wayfarerlib:${wayfarer_version}-neoforge"
     compileOnly "maven.modrinth:map-atlases-forge:1.21-6.6.0"
 }
 
