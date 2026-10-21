@@ -15,7 +15,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraft.world.level.saveddata.maps.MapId;
@@ -36,14 +35,12 @@ public class MapMarkerLogic {
     }
 
     private static boolean checkHand(ServerPlayer player, ItemStack stack, java.util.List<WayfarerRegistry.Waypoint> waypoints) {
-        if (stack.is(Items.FILLED_MAP)) {
-            MapId mapId = stack.get(DataComponents.MAP_ID);
-            if (mapId != null) {
-                MapItemSavedData data = player.level().getMapData(mapId);
-                if (data != null) {
-                    collectMapMarkers(player, data, waypoints);
-                    return true;
-                }
+        MapId mapId = stack.get(DataComponents.MAP_ID);
+        if (mapId != null) {
+            MapItemSavedData data = player.level().getMapData(mapId);
+            if (data != null) {
+                collectMapMarkers(player, data, waypoints);
+                return true;
             }
         }
         return false;
@@ -109,6 +106,8 @@ public class MapMarkerLogic {
     private static boolean isSupported(String type) {
         return type.contains("village") || type.contains("temple") || type.contains("monument")
                 || type.contains("mansion") || type.contains("banner") || type.contains("trial_chambers")
-                || type.contains("red_x") || type.contains("swamp_hut");
+                || type.contains("red_x") || type.contains("swamp_hut") || type.contains("abandoned_camp")
+                || type.contains("ancient_city") || type.contains("desert_pyramid") || type.contains("mineshaft")
+                || type.contains("warm_ocean_ruins");
     }
 }
